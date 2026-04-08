@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Employees API (FastAPI + Mangum) with DynamoDB and shared layer
+
+Resources:
+  EmployeesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${AWS::StackName}-Employees'
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub '${AWS::StackName}-shared'
+      Description: Shared Python dependencies for FastAPI
+      ContentUri: layer/
+      CompatibleRuntimes:
+        - python3.12
+
+  EmployeesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-employees'
+      Handler: lambda_handler.handler
+      Runtime: python3.12
+      Timeout: 30
+      CodeUri: .
+      Layers:
+        - !Ref SharedLayer
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref EmployeesTable
+          DYNAMODB_ENDPOINT: ""
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref EmployeesTable
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

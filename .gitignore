@@ -1,0 +1,33 @@
+# SAM build artifacts
+.aws-sam/
+
+# Python virtual environment
+env/
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Layer site-packages (rebuilt by pip, not committed)
+employees-api/layer/python/
+
+# Layer zip (rebuilt, not committed)
+employees-api/layer/layer.zip
+
+# Local env vars (contains dummy secrets)
+env.json
+
+# pytest cache
+.pytest_cache/
+*.pytest_cache
+
+# Editor
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db

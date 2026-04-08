@@ -1,0 +1,29 @@
+@baseUrl = http://127.0.0.1:3000
+
+### List all employees
+GET {{baseUrl}}/employees
+
+### Create employee
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{
+    "name": "Samantha",
+    "role": "Trainee Engineer",
+    "salary": 60000
+}
+
+### Get employee by ID (replace the id below)
+GET {{baseUrl}}/employees/b9e475a0-47c4-4ccc-a766-c800faf94c50
+
+### Partial update employee (replace the id below)
+PATCH {{baseUrl}}/employees/b9e475a0-47c4-4ccc-a766-c800faf94c50
+Content-Type: application/json
+
+{
+    "role": "Senior Engineer",
+    "salary": 110000
+}
+
+### Delete employee (replace the id below)
+DELETE {{baseUrl}}/employees/b9e475a0-47c4-4ccc-a766-c800faf94c50
