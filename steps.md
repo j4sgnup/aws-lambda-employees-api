@@ -273,6 +273,16 @@ Or use the REST Client VS Code extension — open `employees-api/employees.http`
     ```
     Outputs: ApiUrl = https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/Prod/
     ```
+---
+
+### Create AWS Access key
+
+When doing aws configure, the details of access key will be asked. here are the steps
+
+1. Go to AWS Console → top-right menu → Security credentials
+1. Scroll to Access keys → click Create access key
+1. Choose CLI as the use case → Next → Create
+1. Copy both values immediately — the Secret is only shown once
 
 ---
 

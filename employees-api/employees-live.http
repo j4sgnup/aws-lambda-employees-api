@@ -1,0 +1,29 @@
+@baseUrl = https://pedw0jqezb.execute-api.us-east-1.amazonaws.com/Prod
+
+### List all employees
+GET {{baseUrl}}/employees
+
+### Create employee
+POST {{baseUrl}}/employees
+Content-Type: application/json
+
+{
+    "name": "Alice",
+    "role": "Engineer",
+    "salary": 90000
+}
+
+### Get employee by ID (replace the id below)
+GET {{baseUrl}}/employees/REPLACE-WITH-ID
+
+### Partial update employee (replace the id below)
+PATCH {{baseUrl}}/employees/REPLACE-WITH-ID
+Content-Type: application/json
+
+{
+    "role": "Senior Engineer",
+    "salary": 110000
+}
+
+### Delete employee (replace the id below)
+DELETE {{baseUrl}}/employees/REPLACE-WITH-ID
